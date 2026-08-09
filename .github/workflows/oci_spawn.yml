@@ -1,8 +1,13 @@
 name: Continuous OCI Python SDK Provisioner Loop
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Runs every 5 minutes automatically
-  workflow_dispatch:       # Allows manual execution triggers
+    - cron: '0 * * * *'  # හැම පැයකට වරක් පමණක් ක්‍රියාත්මක වේ
+  workflow_dispatch:
+
+# මෙය එකතු කිරීමෙන් එකවර කීපයක් run වීම නැවතී GitHub account එක ban වීම වැලැක්වේ
+concurrency:
+  group: oci-provisioner
+  cancel-in-progress: true 
 
 jobs:
   attempt-build:
@@ -29,6 +34,5 @@ jobs:
           OCI_REGION: ${{ secrets.OCI_REGION }}
           OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
           OCI_IMAGE_ID: ${{ secrets.OCI_IMAGE_ID }}
-          # ADD THIS RUNNER MAPPING LINE RIGHT HERE:
           OCI_PUBLIC_SSH_KEY: ${{ secrets.OCI_PUBLIC_SSH_KEY }} 
-        run: python "Ampere 24 ram 4 cpu/bot.py"
+        run: python "bot.py"
