@@ -31,4 +31,4 @@ jobs:
           OCI_IMAGE_ID: ${{ secrets.OCI_IMAGE_ID }}
           # ADD THIS RUNNER MAPPING LINE RIGHT HERE:
           OCI_PUBLIC_SSH_KEY: ${{ secrets.OCI_PUBLIC_SSH_KEY }} 
-        run: python "Ampere 24 ram 4 cpu/bot.py"
+        run: python "Ampere 12 ram 2 cpu/bot.py"
